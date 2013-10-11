@@ -36,4 +36,10 @@ class index_controller extends base_controller {
 	} # End of method
 	
 	
+	
+	/*-------------------------------------------------------------------------------------------------
+	Add User?  needs a fname lname uname pw email image
+	-------------------------------------------------------------------------------------------------*/
+	
+	
 } # End of class

@@ -14,6 +14,8 @@
 
 	<?php if(isset($content)) echo $content; ?>
 
+	<!--adding the javascript here, too because it performs better and it doesn't choke the DOM 
+	javascript may need to be here as well as in the head. that's why we echo $client_files_body-->
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
 </body>
 </html>
