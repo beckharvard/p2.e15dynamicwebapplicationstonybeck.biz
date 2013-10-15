@@ -4,6 +4,16 @@ class users_controller extends base_controller {
     public function __construct() {
         parent::__construct();
      #   echo "users_controller construct called<br><br>";
+             
+        $client_files_head = Array(
+    		'../css/style_php.css',
+    		'../../css/style_php.css'
+    		);
+    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
+    	
+    	$client_files_body = Array(
+    		);
+    	$this->template->client_files_body = Utils::load_client_files($client_files_body);
      
     } 
 
@@ -18,11 +28,14 @@ class users_controller extends base_controller {
             $this->template->title   = "Sign Up";
 
         # Render template
-            echo $this->template;
+            echo $this->template;          
 
     }
 	
 	public function p_signup() {
+	
+		$this->template->content = View::instance('v_users_profile');
+    	$this->template->title = "Signed-up";
 
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
@@ -39,7 +52,8 @@ class users_controller extends base_controller {
 
     	# For now, just confirm they've signed up - 
     	# You should eventually make a proper View for this
-    	echo 'You\'re signed up';
+    	echo $this->template->content = View::instance('v_users_p_signup');
+    	
 
 	}
 
@@ -54,12 +68,15 @@ class users_controller extends base_controller {
 
     public function profile($user_name = NULL) {
     
-    
-    	$view = View::instance('v_users_profile');
+    	#Set up the view
+    	$this->template->content = View::instance('v_users_profile');
+    	$this->template->title = "Profile";
     	
-    	$view->user_name = $user_name;
+    	#Pass the data to the View
+    	$this->template->content->user_name = $user_name;
     	
-    	echo $view;
+    	#Display the view
+    	echo $this->template;
 
 	}
   

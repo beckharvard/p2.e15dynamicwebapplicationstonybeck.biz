@@ -1,0 +1,119 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object,
+h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button {
+	margin: 0%;
+	padding: 0%;
+	border: 0;
+	font-size: 100%;
+	font-family: Avenir, Verdana, Geneva, sans-serif	;
+	vertical-align: baseline;
+	text-shadow: 0px 2px 3px #555;
+
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1 {
+	font-size: 5.0em;
+	margin-top: 0%;
+    z-index:2147483647;
+}
+
+img {
+	border-radius:25px;
+}
+
+form {
+	margin-left: 5%;
+	margin-top: 5%;
+
+}
+
+html, button {
+ 	background-color:	black;
+	background-image:url('../../images/noise.png');
+		
+}
+a:link    {
+	color:black;
+
+}
+a:visited {
+	color: white;
+}
+
+iframe {
+	border:	none;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+.nomargin, a.nomargin {
+	margin: 0%;
+	text-align: left;
+}
+#element_Label, #href, #Type	{
+	border-radius:		3px;
+	border:			    2px inset #F8F8F8;
+	border-right:			#F8F8F8;
+	border-bottom:		#FFFFFF;
+	height:				2.2em;
+	background:			#D8D8D8;
+	opacity:				70%;
+  
+  }
+
+#sites td, #sites tr, #sites thead {
+	text-align:	left;
+	margin-right:	3px;
+	margin-left:	0px;
+	padding-right:	0px;
+}
+
+aside {
+	min-width:	10px;
+
+}
+
+#sites {
+
+
+}
