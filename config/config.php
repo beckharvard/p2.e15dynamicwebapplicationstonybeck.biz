@@ -18,7 +18,7 @@ If you want a different default time format for this app, set it below
 
 # When email is sent out from the server, where should it come from?
 # Ideally, this should match the domain name
-	define('APP_EMAIL', 'webmaster@specspec.com'); 
+	define('APP_EMAIL', 'beck@fas.harvard.edu'); 
 
 /* 
 A email designated to receive messages from the server. Examples:
@@ -42,6 +42,7 @@ A email designated to receive messages from the server. Examples:
 	//define('SMTP_USERNAME', '');
 	//define('SMTP_PASSWORD', '');
 
-# For extra security, you might want to set different salts than what the core uses
+# For extra security, you might want to set different salts than what the core uses 
+		# DO NOT EVER CHANGE THERSE VALUES once you have created the database!
 	define('PASSWORD_SALT', 'somereallylongstringoflettersnumbersandsymbols');
 	define('TOKEN_SALT', 'somedifferentlongstringoflettersnumbersandsymbols');
