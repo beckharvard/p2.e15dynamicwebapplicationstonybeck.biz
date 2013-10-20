@@ -63,7 +63,8 @@ class users_controller extends base_controller {
     	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
 
  		# connect to the db and add to the table the user data from post 
-		DB::instance(DB_NAME)->insert_row('users', $_POST);
+		#DB::instance(DB_NAME)->insert_row('users', $_POST);
+		# commented the above because it seems to be the cause of redundant records
 	
 		# sent them to the login page
 		Router::redirect('/users/login');	
