@@ -1,0 +1,391 @@
+/*
+  CSS file for IWB Presentation.html
+  
+  Selectors are ordered by ascii value '#','.', alpha
+*/
+
+
+#accessories {
+/* placeholder for future css if necessary */
+}
+
+#board {
+  float:				right;
+}
+
+#boards {
+  display:				block;
+}
+
+#fields, #fields1, #fields2, #fields3 {
+  font-size:			1.2em;
+}
+#footer {
+  /* IE10 Consumer Preview */ 
+background-image: -ms-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+/* Opera */ 
+background-image: -o-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(radial, left top, 0, left top, 994, color-stop(0, #56A1D5), color-stop(1, #081014));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+
+  padding-bottom:		1em;
+  width:				100%;
+  clear:				both;
+  font-size:			.5em;
+  border-style:			solid;
+  border-top-width:	    6px;
+  border-color:			gray;
+  border-radius: 		20px;
+  border-left-width:	0px;
+  border-right-width:	0px;
+  border-bottom-width:	0px;
+  background-color:		#56a1d5; 
+}
+
+#footer img {
+  border-style:			solid;
+  border-width:			2px;
+  border-color:			white;
+  border-radius: 		64px;
+  margin:			    2em;
+  float:			    left;
+  clear:			    right;	
+  -moz-transform:		rotate(-45deg);
+  -webkit-transform:	rotate(-45deg);	
+  background-color:		gray;
+  transition-property: background-color;
+  transition-duration: .15s;
+  transition-timing-function:  linear;
+}
+
+#footer p {
+ margin-top:			1.5em;
+}
+
+#header {
+ /* IE10 Consumer Preview */ 
+background-image: -ms-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(radial, left top, 0, left top, 994, color-stop(0, #56A1D5), color-stop(1, #081014));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-radial-gradient(left top, ellipse farthest-corner, #56A1D5 0%, #081014 100%);
+
+
+  overflow: 			hidden; 
+  height: 			    100px;
+  background-color:		#56a1d5;
+  border-radius: 		20px;
+  border-style:			solid;
+  border-top-width:	    0px;
+  border-bottom-width:	6px;
+  border-color:			gray;
+  border-radius: 		20px;
+  border-left-width:    0px;
+  border-right-width:   0px;
+ 
+}
+
+#header h1 {
+  line-height:			0%;
+  color:			    white;
+  font-size:			6.1em;
+  margin:			    .5em;
+  padding-top:			.05em;
+}
+
+#iamhere small {
+  color:			#56a1d5;
+}
+
+#iamhere smaller {
+  color:			#56a1d5;
+}
+
+#leftist {
+  display:				block;
+  margin:				0em;
+  padding-right:		0em;
+  width:				10em;
+  float:				left;
+  clear:				both;
+}
+
+#nav {
+  display:				inline;
+  /* Note: The CSS opacity property is a part of the W3C CSS3 recommendation.  May be risky!*/
+  opacity:				1.0;
+}
+
+#results table {
+  width: 			20%; 
+  border-spacing: 		0px; 
+  border-collapse: 		separate; 
+  border: 			thin solid #ccc;
+}
+
+#results tr {
+  width:			100%;
+  text-align:			left;
+  font-size:			.5em;
+  border:			black;	
+}
+
+#results thead th { 
+  color: 			black; 
+  background-color: 		#ddf; 
+  border: thin solid 		#ccc; 
+}
+
+#results tbody tr td, #results tbody tr th { 
+  text-align: 			left; 
+  vertical-align: 		bottom; 
+  border: 			thin solid #ccc;
+}
+
+#section, #section li {
+  margin-left:			5%;
+  width: 			    85%;
+}
+
+#section h2 .opinion {
+	font-size:		    .5em;
+}
+
+#siteNav li a:link {
+  text-decoration:		none; 
+  color:			    #FFF;
+}
+
+#spacer {
+  width:  			    100%;
+  height: 			    1px; 
+  background-color:		#D0D0D0;
+  border-top-left-radius:	2em;
+  border-bottom-left-radius:	2em;
+  
+}
+
+#wrapper {
+  font-family:			Avenir, Helvetica, Arial, sans-serif;
+  width: 			    95%;
+  margin-left:			20px;
+  -moz-box-shadow: 		10px 3px 4px #999;
+  -webkit-box-shadow: 	10px 3px 4px #999;
+  box-shadow: 			10px 3px 4px #999;
+  /*box-shadow:			inset 10px 0px 17px #afafaf; */
+  border-radius: 		20px;
+  background-color:     #FFFFFF;
+}
+
+.error {
+  color:			    #56a1d5;
+  font-style:		    italic;
+  padding-left:		    0.5em;
+}
+
+.questionchoices {
+  font-size:			1.4em;
+}
+
+/* MEDIA QUERIES*/
+@media only screen and (max-width : 1350px),
+only screen and (max-device-width : 1350px){
+    #nav li a {
+        font: 			400 12px/1.4 'Cutive', Helvetica, Verdana, Arial, sans-serif;
+
+    }
+     
+    #nav small {
+        font: 			100 9px/1 Helvetica, Verdana, Arial, sans-serif;
+
+    }
+}
+
+body {
+
+  min-width:		    800px;
+}
+
+caption {
+ font-size:				1.0em;
+ font-weight:			bold;
+}
+
+h2 {
+  font-size:			4.0em;
+}
+
+h3 {
+  font-size:			2.0em;
+}
+h4 {
+  font-size:			2.0em;
+}
+
+hr {
+  padding:			    0;
+  margin-top:			0;
+  height:			    100px;
+  margin-right:			2px;
+  visibility:			hidden; 
+}
+
+input#name, input#lname,input#email {
+/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F8F8));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F8F8F8 100%);
+  border-radius:		3px;
+  border:			    1px inset #F8F8F8;
+  border-right:			#F8F8F8;
+  border-bottom:		#FFFFFF;
+
+}
+
+label {
+  font-size:			.8em;
+}
+
+legend {
+  font-size:			2.0em;
+}
+
+ol span {
+  width:			    70%;
+  text-align:			center;
+  margin-right:			50px;
+}
+
+p, ul, ol{
+  font-size:			2.0em;
+}
+
+span {
+  position:			    fixed;
+  background-color:		#FFFFFF; 
+  text-align:			right;
+}
+
+table {
+  width:				100%;
+  text-align:			center;
+  font-size:			2.0em;
+}
+
+td  {
+ width:				15em;
+}
+
+td.highlight, th.highlight { 
+  background-color: #ff9; 
+  color: black;}
+
+textarea#ccomment{
+/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F8F8));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #F8F8F8 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom right, #FFFFFF 0%, #F8F8F8 100%);
+  
+  border-radius:		3px;
+  border:				1px inset #F8F8F8;
+  border-right:			#F8F8F8;
+  border-bottom:		#FFFFFF;
+
+}
+
+ul {
+ height:			    .5em;
+ margin-top:			.25em;
+ margin-bottom:			.25em;
+ padding-left:			0px;
+ min-width:				800px;
+}
+
+ul#siteNav img {
+
+ display:				none;
+}
+
+ul#siteNav li {
+  text-decoration:		inherit;   
+  display: 			    inline;
+  padding-left:			.25em;
+  padding-right:		.25em;
+  margin-left:			4px;
+  margin-right:			4px;
+  overflow:			    inherit;	
+  
+   -webkit-box-sizing:  border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            
+  display: 				block;
+  float: 				left;
+  width: 				11%;
+  padding: 				10px;
+  color:				#FFF; 
+  background: 			#444;
+  border-radius: 		4px;  
+  font: 				300 13px/1.4 'Cutive', Helvetica, Verdana, Arial, sans-serif;
+  font-weight:			bold;
+  text-align: 			center;
+  text-decoration: 		none;
+  text-transform: 		uppercase;
+}
+
+ul#siteNav li a:visited {
+  text-decoration:		none; 
+  color:			    #FFF;
+  background: 			#444;
+
+}
+
+ul#siteNav li a:hover { 
+  color:			    #56a1d5;
+
+}
+

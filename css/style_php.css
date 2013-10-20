@@ -113,7 +113,8 @@ aside {
 
 }
 
-#sites {
-
-
+.error {
+  color:			    #56a1d5;
+  font-style:		    italic;
+  padding-left:		    0.5em;
 }

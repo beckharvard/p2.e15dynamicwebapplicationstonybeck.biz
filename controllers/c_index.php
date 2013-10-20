@@ -19,7 +19,10 @@ class index_controller extends base_controller {
 			$this->template->content = View::instance('v_index_index');
 			
 		# Now set the <title> tag
-			$this->template->title = "Hello World";
+			$this->template->title = "SpecSpec";
+			
+		# Render the view
+			echo $this->template;
 	
 		# CSS/JS includes
 			/*
@@ -29,16 +32,34 @@ class index_controller extends base_controller {
 	    	$client_files_body = Array("");
 	    	$this->template->client_files_body = Utils::load_client_files($client_files_body);   
 	    	*/
+	    	
+	    	echo "<br/>";
+		
+		    $q = "SELECT last_name, first_name 
+        			FROM users
+        			ORDER BY last_name";
+		
+			# Get the list of users
+ 			if ($result = DB::instance(DB_NAME)->query($q)) {	
+    		/* fetch object array */
+    			while ($row = $result->fetch_row()) {
+        			printf ("%s, %s\n", $row[0], $row[1]);
+        			echo "<br/>";
+    		}
+    		$result->close();
+		}	
 	      					     		
-		# Render the view
-			echo $this->template;
+
+			
+			
+			
 
 	} # End of method
 	
 	
 	
 	/*-------------------------------------------------------------------------------------------------
-	Add User?  needs a fname lname uname pw email image
+	Add User?  needs a first name last name uname pw email image
 	-------------------------------------------------------------------------------------------------*/
 	
 	
