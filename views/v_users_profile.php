@@ -1,7 +1,7 @@
-<?php if(isset($user)): ?>
+<?php if($user): ?>
 	<h2>This is <?=$user->first_name?>'s  profile...</h2>
 <?php else: ?>
-	<h2> No user has been specified</h2>
+<?php    	Router::redirect("/users/login");  ?>
 <?php endif; ?>
 
 <?php if($user) echo 'First Name: '.$user->first_name;?>

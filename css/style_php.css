@@ -32,6 +32,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	margin: 2%;
+	padding: 2%;
 
 }
 ol, ul {
