@@ -33,25 +33,6 @@ class index_controller extends base_controller {
 	    	$this->template->client_files_body = Utils::load_client_files($client_files_body);   
 	    	*/
 	    	
-	    	echo "<br/>";
-		
-		    $q = "SELECT last_name, first_name 
-        			FROM users
-        			ORDER BY last_name";
-		
-			# Get the list of users
- 			if ($result = DB::instance(DB_NAME)->query($q)) {	
-    		/* fetch object array */
-    			while ($row = $result->fetch_row()) {
-        			printf ("%s, %s\n", $row[0], $row[1]);
-        			echo "<br/>";
-    		}
-    		$result->close();
-		}	
-	      					     		
-
-			
-			
 			
 
 	} # End of method

@@ -18,13 +18,14 @@
 
 	 <div id='menu'>
 
-        <a href='/'>Home</a>
-
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
-
-            <a href='/users/logout'>Logout</a>
+			<a href='/users/logout'>Logout</a>
             <a href='/users/profile'>Profile</a>
+			<a href='/posts/add'>Add Post</a>
+			<a href='/posts/'>View Posts</a>
+			<a href='/posts/users'>Follow users</a>
+
 
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>

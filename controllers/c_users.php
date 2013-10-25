@@ -15,17 +15,32 @@ class users_controller extends base_controller {
     	
     	$client_files_body = Array(
     		);
-    	$this->template->client_files_body = Utils::load_client_files($client_files_body);
-     
+    	$this->template->client_files_body = Utils::load_client_files($client_files_body);     
     } 
 
     public function index() {
-    
+    	 # Set up the View
         $this->template->content = View::instance('v_users_index');
-        $this->template->title   = "THE INDEX";
-    
+        $this->template->title   = "THE INDEX";	
+        
+        echo "<br/>";
+		
+		    $q = "SELECT last_name, first_name 
+        			FROM users
+        			ORDER BY last_name";
+		
+			# Get the list of users
+ 			if ($result = DB::instance(DB_NAME)->query($q)) {	
+    		/* fetch object array */
+    			while ($row = $result->fetch_row()) {
+        			printf ("%s, %s\n", $row[0], $row[1]);
+        			echo "<br/>";
+    		}
+    		$result->close();
+		}	
+	      					     		
 
-    	
+        
     }
 
   	public function signup($error = NULL) {
@@ -39,7 +54,6 @@ class users_controller extends base_controller {
 
         # Render template
         echo $this->template;          
-
     }
 	
 	public function p_signup() {
@@ -65,7 +79,6 @@ class users_controller extends base_controller {
 		# sent them to the login page
 		Router::redirect('/users/login');	
 	}
-
 
     public function login($error = NULL) {
         # Set up the view
@@ -114,13 +127,11 @@ class users_controller extends base_controller {
         	param 3 = when to expire
         	param 4 = the path of the cooke (a single forward slash sets it for the entire domain)
         	*/
-        	setcookie("token", $token, strtotime('+2 weeks'), '/');
+        	setcookie("token", $token, strtotime('+1 year'), '/');
 
         	# Send them to the main page - or whever you want them to go
         	Router::redirect("/index");
-
     	}
-
 	}
 
     public function logout() {
@@ -139,13 +150,12 @@ class users_controller extends base_controller {
 
     	# Send them back to the login page.
     	Router::redirect("/users/login");
-
     }
 
 	# original text here was     public function profile($user_name = NULL) {
-    public function profile() {
+	# I have removed it as part of my effort to keep profile info private.
+    public function profile($user_name = NULL) {
     
-
     	#Set up the view
     	$this->template->content = View::instance('v_users_profile');
     	$this->template->title = "Profile";
@@ -155,8 +165,5 @@ class users_controller extends base_controller {
     	
     	#Display the view
     	echo $this->template;
-
 	}
-  
-
 } # eoc

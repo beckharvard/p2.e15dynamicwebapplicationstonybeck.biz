@@ -18,11 +18,11 @@
 		
 		$q = 'SELECT email 
 			FROM users 
-			WHERE first_name = "'.$_POST['first_name'].'";
+			WHERE first_name = "'.$_POST['first_name'].'"';
 			
 			echo DB::instance(DB_NAME)->select_field($q);
 	
 	}
 ?>
 
-YEAH. htis needs to be fixed.
+#YEAH. htis needs to be fixed.
