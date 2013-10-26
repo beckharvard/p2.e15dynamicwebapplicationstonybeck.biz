@@ -1,6 +1,4 @@
-
-
-<h2>Edit a Post<h2>
+<h2>Add a Post<h2>
 
 <form method ='POST' action ='/posts/p_add'>
 
