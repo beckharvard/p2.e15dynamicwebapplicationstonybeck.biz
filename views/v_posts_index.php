@@ -1,15 +1,17 @@
 <?php foreach($posts as $post): ?>
 
-<article>
+	<article>
 
-    <h2><?=$post['first_name']?> <?=$post['last_name']?> posted:</h2>
+    	<h2><?=$post['first_name']?> <?=$post['last_name']?> posted:</h2>
 
-    <p><?=$post['content']?></p>
+    	<p><?=$post['content']?></p>
 
-    <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
-        <?=Time::display($post['created'])?>
-    </time>
+    	<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
+       		<?=Time::display($post['created'])?>
+    	</time>
 
-</article>
-<br/>
+	</article>
+	<br/>
 <?php endforeach; ?>
+	<h2> Why not follow someone? <a href='/posts/users'>Other Posters</a></h2>
+	

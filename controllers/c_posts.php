@@ -13,6 +13,8 @@ class posts_controller extends base_controller {
 
     	# Set up the View
     	$this->template->content = View::instance('v_posts_index');
+
+    	
     	$this->template->title   = "Posts";
 
     	# Build the query
@@ -75,15 +77,6 @@ class posts_controller extends base_controller {
     	echo $this->template;
 	}
     
-	public function add()  {
-	 	# Set up the View
-    	$this->template->content = View::instance('v_posts_add');
-    	# echo "This is something about adding a post";
-    	
-    	# Render template
-        echo $this->template;
-    }
-    
     public function follow($user_id_followed) {
 
     	# Prepare the data array to be inserted
@@ -112,16 +105,18 @@ class posts_controller extends base_controller {
 
 	}
     
-    # odd function names are less guessable
+    public function add()  {
+	 	# Set up the View
+    	$this->template->content = View::instance('v_posts_add');
+    	# echo "This is something about adding a post";
+    	
+    	# Render template
+        echo $this->template;
+    }
+    
     public function p_add()  {
     	# Set up the View
     	$this->template->content = View::instance('v_posts_p_add');
-    	
-    	# STILL NEED TO CHECK THAT WE HAVE A USER_ID!
-    	#   !!!!! VERY IMPORTANT !!!!!
-    	
-    	# sanitize the post data
-    	#$_POST = DB::instance(DB_NAME)-sanitize($_POST);
     	
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
@@ -134,17 +129,46 @@ class posts_controller extends base_controller {
     	echo "Your post has been added. <a href='/posts/add'>Add another</a>";
     }
     
-    public function edit()  {
-    	 # Set up the View
-    
+    public function edit($edited)  {
+    	# Set up the View
     	$this->template->content = View::instance('v_posts_edit');
-    	 echo "This is something about editing a post";
+    		
+    	# Build the query to get the post
+    	$q = "SELECT content
+    	    FROM posts 
+    	    WHERE post_id = ".$edited;
+
+    	# Execute the query to get all the users. 
+    	# Store the result array in the variable $post
+    	$editable = DB::instance(DB_NAME)->select_row($q);
+    	
+    	# Pass data to the view
+    	$this->template->content = $editable['content'];
+    	
+    	# Render template
+        echo $this->template;
     	 
-    	 $_POST['modified'] = Time::now();
+
+    }
+    
+    public function p_edit()  {
+    	# Set up the View
+    	$this->template->content = View::instance('v_posts_p_edit');
+    
+    	$data = Array(
+    	 	"post_id" => $toBe_edited,
+    	 	"content" => $toBe_edited,
+    	    "created" => posts.created,
+    	    "modified" => Time::now(),
+    	    "user_id" => $this->user->user_id
+    	    );
+    	    
+		$updated_post = DB::instance(DB_NAME)->update('posts', $data);
     	# Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
 
-    	$author_user_id = DB::instance(DB_NAME)->update("posts", $_POST);
+ 
+        
     }
     
     public function deletepost()  {

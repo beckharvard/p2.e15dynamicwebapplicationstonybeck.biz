@@ -20,27 +20,7 @@ class users_controller extends base_controller {
 
     public function index() {
     	 # Set up the View
-        $this->template->content = View::instance('v_users_index');
-        $this->template->title   = "THE INDEX";	
-        
-        echo "<br/>";
-		
-		    $q = "SELECT last_name, first_name 
-        			FROM users
-        			ORDER BY last_name";
-		
-			# Get the list of users
- 			if ($result = DB::instance(DB_NAME)->query($q)) {	
-    		/* fetch object array */
-    			while ($row = $result->fetch_row()) {
-        			printf ("%s, %s\n", $row[0], $row[1]);
-        			echo "<br/>";
-    		}
-    		$result->close();
-		}	
-	      					     		
-
-        
+    	
     }
 
   	public function signup($error = NULL) {
@@ -75,7 +55,7 @@ class users_controller extends base_controller {
 
     	# Insert this user into the database 
     	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
-	
+    	
 		# sent them to the login page
 		Router::redirect('/users/login');	
 	}
@@ -87,9 +67,10 @@ class users_controller extends base_controller {
 
     	# Pass data to the view
     	$this->template->content->error = $error;
-
+    	
     	# Render the view
     	echo $this->template;
+    	
     }
     
 	public function p_login() {
@@ -130,7 +111,7 @@ class users_controller extends base_controller {
         	setcookie("token", $token, strtotime('+1 year'), '/');
 
         	# Send them to the main page - or whever you want them to go
-        	Router::redirect("/index");
+        	Router::redirect("/posts");
     	}
 	}
 
@@ -162,6 +143,20 @@ class users_controller extends base_controller {
     	
     	#Pass the data to the View
     	#$this->template->content->user_name = $user_name;
+    	
+    	# Build the query
+    	$q = 'SELECT
+            posts.content,
+            posts.created,
+            posts.post_id
+        FROM posts
+        WHERE posts.user_id = '.$this->user->user_id;
+
+    	# Run the query
+    	$posts = DB::instance(DB_NAME)->select_rows($q);
+
+    	# Pass data to the View
+    	$this->template->content->posts = $posts;  	
     	
     	#Display the view
     	echo $this->template;

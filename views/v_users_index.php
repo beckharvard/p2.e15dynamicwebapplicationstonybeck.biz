@@ -1,13 +1,17 @@
-<!-- check to see if ser is logged in
 <?php if($user): ?>
 <!-- display the welcome message -->
 <h2>Welcome to <?=APP_NAME?><?php if($user) echo ', '.$user->first_name; ?></h2>
 <?php else: ?>
+	<?php foreach($posts as $post): ?>
+		<article>
+    		<p><?=$post['content']?></p>
+    		<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
+        		<?=Time::display($post['created'])?>
+    		</time>
+		</article>
+	<br/>
+	<?php endforeach; ?>
+
 <!-- Send them back to the login page.-->
 <?php    	Router::redirect("/users/login");  ?>
- <?php endif; ?>
-
-
-
-I DON'T KNOW IF THIS IS EVER BEING LOADED....
--->
+<?php endif; ?>

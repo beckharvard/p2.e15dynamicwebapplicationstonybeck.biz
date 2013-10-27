@@ -44,7 +44,21 @@
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
 </body>
 <footer>
+<hr/>
+<div style="float:left;">
+<p>SpecSpec's +1 features</p>
+<ul>
+	<li>lorem ipsum</li>
+	<li>lorem ipsum</li>
+</ul>
+</div>
+<div style="padding-left: 90%;">
+<p>Anthony Beck</p>
+<ul>
+<li>DWA Project 2</li>
 
+</ul>
+</div>
 
 </footer>
 </html>

@@ -12,7 +12,7 @@
     
 -->
 	Post<br>
-	<input id='content' size="100" type='text' name='content'>
+	<textarea id='content' cols="72" rows="25" type='text' name='content'></textarea>
     <br>
 	
     <input type='submit' value='Publish Post'>

@@ -36,6 +36,12 @@ body {
 	padding: 2%;
 
 }
+
+#content {
+	border-radius: 5px;
+	background-color: #E8E8E8 ;
+}
+
 ol, ul {
 	list-style: none;
 }
