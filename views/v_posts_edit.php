@@ -1,11 +1,9 @@
-<h2>Edit a Post<h2>
+<form method ='POST' action ='/posts/p_edit/<?=$post['post_id']; ?>'>
 
-<form method ='POST' action ='/posts/p_edit'>
-
-Post<br>
+Edit your post<br>
 	<textarea id='content' cols="72" rows="25" type='text' name='content'><?=$post['content']?></textarea>
     <br>
-    <input type='submit' value='Publish Post'>
+    <input type='submit' value='Update Post'>
 
 </form>
 

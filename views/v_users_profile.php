@@ -20,15 +20,16 @@
 <br/>
 
 <?php foreach($posts as $post): ?>
-	<a href='/posts/edit/<?=$post['post_id']; ?>' >Edit</a>
+	
 	<article>
 
     	<p><?=$post['content']?></p> 
-
+		<h3>This post was created on:
     	<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
        		<?=Time::display($post['created'])?>
     	</time>
-    	
+    	<a href='/posts/edit/<?=$post['post_id']; ?>' >Edit this post</a>
+    	</h3>
 	</article>
 	<br/>
 <?php endforeach; ?>

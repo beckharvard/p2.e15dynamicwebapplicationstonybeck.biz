@@ -13,24 +13,24 @@ class posts_controller extends base_controller {
 
     	# Set up the View
     	$this->template->content = View::instance('v_posts_index');
-
     	
     	$this->template->title   = "Posts";
 
     	# Build the query
-    	$q = 'SELECT 
-            posts.content,
-            posts.created,
-            posts.user_id AS post_user_id,
-            users_users.user_id AS follower_id,
-            users.first_name,
-            users.last_name
-        FROM posts
-        INNER JOIN users_users 
-            ON posts.user_id = users_users.user_id_followed
-        INNER JOIN users 
-            ON posts.user_id = users.user_id
-        WHERE users_users.user_id = '.$this->user->user_id;
+    	$q = 'SELECT
+                posts.content,
+                posts.created,
+                posts.user_id AS post_user_id,
+                users_users.user_id AS follower_id,
+                users.first_name,
+                users.last_name
+              FROM posts 
+              INNER JOIN users_users
+              ON posts.user_id = users_users.user_id_followed
+              INNER JOIN users
+              ON posts.user_id = users.user_id
+              WHERE users_users.user_id = '.$this->user->user_id .' 
+              ORDER BY posts.created DESC' ;
 
     	# Run the query
     	$posts = DB::instance(DB_NAME)->select_rows($q);
@@ -126,7 +126,8 @@ class posts_controller extends base_controller {
 
     	$author_user_id = DB::instance(DB_NAME)->insert("posts", $_POST);
     	
-    	echo "Your post has been added. <a href='/posts/add'>Add another</a>";
+    	# Send them back
+       	Router::redirect('/users/profile');    	
     }
     
     public function edit($edited)  {
@@ -134,7 +135,7 @@ class posts_controller extends base_controller {
     	$this->template->content = View::instance('v_posts_edit');
     		
     	# Build the query to get the post
-    	$q = "SELECT content
+    	$q = "SELECT *
     	    FROM posts 
     	    WHERE post_id = ".$edited;
 
@@ -143,38 +144,32 @@ class posts_controller extends base_controller {
     	$editable = DB::instance(DB_NAME)->select_row($q);
     	
     	# Pass data to the view
-    	$this->template->content = $editable['content'];
+    	$this->template->content->post = $editable;
     	
     	# Render template
-        echo $this->template;
-    	 
+        echo $this->template;  	 
 
     }
     
-    public function p_edit()  {
+    public function p_edit($id)  {
+    
     	# Set up the View
     	$this->template->content = View::instance('v_posts_p_edit');
-    
-    	$data = Array(
-    	 	"post_id" => $toBe_edited,
-    	 	"content" => $toBe_edited,
-    	    "created" => posts.created,
-    	    "modified" => Time::now(),
-    	    "user_id" => $this->user->user_id
-    	    );
-    	    
-		$updated_post = DB::instance(DB_NAME)->update('posts', $data);
-    	# Associate this post with this user
-        $_POST['user_id']  = $this->user->user_id;
-
- 
-        
-    }
-    
-    public function deletepost()  {
-     	# Set up the View
+  		
+  		# Set the modified time  
+    	$_POST['modified'] = Time::now();
+    	# be sure to Associate this post with this user
+    	
+    	# NOT SURE I NEED THIS...
+        $_POST['user_id']  = $this->user->user_id;  
+         
+    	$where_condition = 'WHERE post_id = '.$id;  
+    	# $where_condition = 'WHERE post_id = 10';  
      
-    	#$this->template->content = View::instance('v_posts_deletepost');
-    	# echo "This is something about deleting a post";
+ 		$updated_post = DB::instance(DB_NAME)->update('posts', $_POST, $where_condition);
+
+		# Send them back
+       	Router::redirect('/users/profile');
     }
-}?>    
+} # eoc
+    

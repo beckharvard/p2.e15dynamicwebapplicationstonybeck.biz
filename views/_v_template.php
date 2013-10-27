@@ -5,6 +5,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<link href="../css/style_php.css" type="text/css" rel="stylesheet">
+	<link href="../../css/style_php.css" type="text/css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript">
 </script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
@@ -48,7 +49,7 @@
 <div style="float:left;">
 <p>SpecSpec's +1 features</p>
 <ul>
-	<li>lorem ipsum</li>
+	<li>Ability to edit own posts from Profile</li>
 	<li>lorem ipsum</li>
 </ul>
 </div>

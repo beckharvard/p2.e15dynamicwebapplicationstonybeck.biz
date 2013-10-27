@@ -3,13 +3,13 @@ class users_controller extends base_controller {
 
     public function __construct() {
         parent::__construct();
-     #   echo "users_controller construct called<br><br>";
              
         $client_files_head = Array(
         	'../js/validate.js',
         	'../../js/validate.js',
     		'../css/style_php.css',
-    		'../../css/style_php.css'
+    		'../../css/style_php.css',
+    		'../../../css/style_php.css'
     		);
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
     	
@@ -150,7 +150,8 @@ class users_controller extends base_controller {
             posts.created,
             posts.post_id
         FROM posts
-        WHERE posts.user_id = '.$this->user->user_id;
+        WHERE posts.user_id = '.$this->user->user_id.' 
+            ORDER BY posts.created DESC' ;
 
     	# Run the query
     	$posts = DB::instance(DB_NAME)->select_rows($q);
