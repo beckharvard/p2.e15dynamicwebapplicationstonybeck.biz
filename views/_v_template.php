@@ -47,16 +47,18 @@
 <footer>
 <hr/>
 <div style="float:left;">
-<p>SpecSpec's +1 features</p>
+<h2>SpecSpec's +1 features</h2>
 <ul>
 	<li>Ability to edit own posts from Profile</li>
-	<li>lorem ipsum</li>
+	<li>Ability to edit own Profile</li>
 </ul>
 </div>
 <div style="padding-left: 90%;">
-<p>Anthony Beck</p>
+
 <ul>
+<li>Anthony Beck</li>
 <li>DWA Project 2</li>
+<li>beck@fas.harvard.edu</li>
 
 </ul>
 </div>

@@ -7,6 +7,8 @@ class users_controller extends base_controller {
         $client_files_head = Array(
         	'../js/validate.js',
         	'../../js/validate.js',
+        	'../js/validate_posts.js',
+        	'../../js/validate_posts.js',
     		'../css/style_php.css',
     		'../../css/style_php.css',
     		'../../../css/style_php.css'
@@ -14,8 +16,16 @@ class users_controller extends base_controller {
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
     	
     	$client_files_body = Array(
+    		'../js/validate.js',
+        	'../../js/validate.js',
+        	'../js/validate_posts.js',
+        	'../../js/validate_posts.js',
+    		'../css/style_php.css',
+    		'../../css/style_php.css',
+    		'../../../css/style_php.css'
     		);
-    	$this->template->client_files_body = Utils::load_client_files($client_files_body);     
+    	$this->template->client_files_body = Utils::load_client_files($client_files_body); 
+    	   
     } 
 
     public function index() {
@@ -42,6 +52,13 @@ class users_controller extends base_controller {
 		#------------------------------------------------------------------
 		$this->template->content = View::instance('v_users_signup');
     	$this->template->title = "Signed-up";
+    	
+    	#setup for mail
+    	$to = $_POST['email'];
+    	$subject = "Welcome to SpecSpec!";
+    	$message = "It's great to mmet you. Log in at p2.e15dynamicwebapplicationstonybeck.biz";
+    	$from = 'beck@fas.harvard.edu';
+    	$headers = "From:" . $from; 	
 
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
@@ -56,6 +73,10 @@ class users_controller extends base_controller {
     	# Insert this user into the database 
     	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
     	
+    	#Let's mail them out a welcome email 
+    	if(!$this->user) {
+    		mail($to, $subject, $message, $headers);
+    	} 	
 		# sent them to the login page
 		Router::redirect('/users/login');	
 	}
@@ -132,17 +153,16 @@ class users_controller extends base_controller {
     	# Send them back to the login page.
     	Router::redirect("/users/login");
     }
-
-	# original text here was     public function profile($user_name = NULL) {
-	# I have removed it as part of my effort to keep profile info private.
-    public function profile($user_name = NULL) {
+	#got rid of  public function profile($user_name = NULL) {
+    public function profile() {
+    
+    	if(!$this->user) {
+            die("Members only. <a href='/users/login'>Login</a>");
+        }
     
     	#Set up the view
     	$this->template->content = View::instance('v_users_profile');
     	$this->template->title = "Profile";
-    	
-    	#Pass the data to the View
-    	#$this->template->content->user_name = $user_name;
     	
     	# Build the query
     	$q = 'SELECT
@@ -161,5 +181,56 @@ class users_controller extends base_controller {
     	
     	#Display the view
     	echo $this->template;
+	}
+	
+	public function editProfile() {
+	
+		if(!$this->user) {
+            die("Members only. <a href='/users/login'>Login</a>");
+        }
+	
+		#Set up the view
+    	$this->template->content = View::instance('v_users_editProfile');
+    	$this->template->title = "Edit Profile";
+    	
+    	# Prepare the data array to be inserted
+    	$data = Array(
+    		"first_name" => $this->user->first_name,
+    	    "last_name" => $this->user->last_name,
+    	    "email" => $this->user->email,
+    	    "password" => $this->user->password,
+    	    "user_id" => $this->user->user_id
+    	    );
+    	
+    	#Pass the data to the View
+    	$this->template->content->user       = $data;
+    	
+    	#Display the view
+    	echo $this->template;
+	}
+	
+	public function p_editProfile($id) {
+	
+		if(!$this->user) {
+            die("Members only. <a href='/users/login'>Login</a>");
+        }
+	
+	    	# Set up the View
+    	$this->template->content = View::instance('v_users_p_editProfile');
+  		
+  		# Set the modified time  
+    	$_POST['modified'] = Time::now();
+    	# be sure to Associate this post with this user
+    	
+    	# NOT SURE I NEED THIS...
+        $_POST['user_id']  = $this->user->user_id;  
+         
+    	$where_condition = 'WHERE user_id = '.$id;    
+     
+ 		$updated_post = DB::instance(DB_NAME)->update('users', $_POST, $where_condition);
+ 		
+ 		# Send them back to the login page.
+    	Router::redirect("/users/profile");
+	
 	}
 } # eoc

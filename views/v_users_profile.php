@@ -1,12 +1,12 @@
-<?php if($user): ?>
-	<h2>This is <?=$user->first_name?>'s  profile...</h2>
+<?php if(!$user): ?>
+	<?php    	Router::redirect("/users/login");  ?>
 <?php else: ?>
-<?php    	Router::redirect("/users/login");  ?>
+	<h2>This is <?=$user->first_name?>'s  profile...</h2>
 <?php endif; ?>
 <br/>
-<?php if($user) echo 'First Name: '.$user->first_name;?>
-<?php echo '<br/>'; ?>
-<?php if($user) echo 'Last Name: '.$user->last_name; ?>
+<?php if($user) echo $user->first_name;?>
+<?php echo ' '; ?>
+<?php if($user) echo $user->last_name; ?>
 <?php echo '<br/>'; ?>
 <?php if($user) echo 'email: '.$user->email; ?>
 <?php echo '<br/>'; ?>
@@ -16,6 +16,7 @@
 	echo date('M d Y', $convert_time); 
 ?>
 <br/>
+<h3><a href='/users/editProfile' >Edit my profile</a></h3>
 <hr/>
 <br/>
 
