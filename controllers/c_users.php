@@ -9,8 +9,8 @@ class users_controller extends base_controller {
         	'../../js/validate.js',
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
+        	'../../../js/validate_posts.js',
     		'../css/style_php.css',
-    		'../../css/style_php.css',
     		'../../../css/style_php.css'
     		);
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
@@ -20,8 +20,8 @@ class users_controller extends base_controller {
         	'../../js/validate.js',
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
+        	'../../../js/validate_posts.js',
     		'../css/style_php.css',
-    		'../../css/style_php.css',
     		'../../../css/style_php.css'
     		);
     	$this->template->client_files_body = Utils::load_client_files($client_files_body); 
@@ -56,7 +56,7 @@ class users_controller extends base_controller {
     	#setup for mail
     	$to = $_POST['email'];
     	$subject = "Welcome to SpecSpec!";
-    	$message = "It's great to mmet you. Log in at p2.e15dynamicwebapplicationstonybeck.biz";
+    	$message = "It's great to meet you! Thanks for joining SpecSpec: you can log in at p2.e15dynamicwebapplicationstonybeck.biz";
     	$from = 'beck@fas.harvard.edu';
     	$headers = "From:" . $from; 	
 
@@ -217,6 +217,26 @@ class users_controller extends base_controller {
 	
 	    	# Set up the View
     	$this->template->content = View::instance('v_users_p_editProfile');
+    	
+    	$q = 'SELECT password 
+    		FROM users
+    		WHERE user_id = '.$id;
+    		
+    	$current_password = DB::instance(DB_NAME)->query($q);
+    	
+
+    	#$new_salted_pw = sha1(PASSWORD_SALT.$_POST['password']);
+    	
+    	#echo 'new pw salted'.print_r($new_salted_pw );
+    	#echo 'current pw salted'.print_r($current_password);
+    	
+    	
+    	if ($_POST['password'] != ''){
+    	
+    		# Encrypt the password (with salt)
+    		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);   
+    	
+    	} 
   		
   		# Set the modified time  
     	$_POST['modified'] = Time::now();

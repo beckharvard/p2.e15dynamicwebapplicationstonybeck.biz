@@ -10,6 +10,8 @@
 </script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
 </script>
+
+	<h1>SpecSpec</h1>
 			
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
@@ -50,7 +52,7 @@
 <h2>SpecSpec's +1 features</h2>
 <ul>
 	<li>Ability to edit own posts from Profile</li>
-	<li>Ability to edit own Profile</li>
+	<li>Confirmation Email</li>
 </ul>
 </div>
 <div style="padding-left: 90%;">
