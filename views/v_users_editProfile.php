@@ -1,5 +1,6 @@
 <?php if($user): ?>
 	<h2>Edit <?=$user["first_name"]?>'s  profile...</h2>
+	<br/>
 <?php else: ?>
 <?php    	Router::redirect("/users/login");  ?>
 <?php endif; ?>
