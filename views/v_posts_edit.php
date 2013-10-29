@@ -3,7 +3,7 @@
 Edit your post<br>
 	<textarea id='myPost' cols="72" rows="25" type='text' name='content' required><?=$post['content']?></textarea>
     <br>
-    <input type='submit' value='Update Post'>
+    <input class="buttons" type='submit' value='Update Post'>
 
 </form>
 

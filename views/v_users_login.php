@@ -17,6 +17,6 @@
         	<br>
     	<?php endif; ?>
 
-	 <input type='submit' value='Log In'>
+	 <input class="buttons" type='submit' value='Log In'>
 
 </form>

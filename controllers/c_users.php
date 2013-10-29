@@ -63,6 +63,7 @@ class users_controller extends base_controller {
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
     	$_POST['modified'] = Time::now();
+    	unset($_POST['confirm_password']);
 
     	# Encrypt the password (with salt)
     	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);            
@@ -226,7 +227,6 @@ class users_controller extends base_controller {
     	
 
     	#$new_salted_pw = sha1(PASSWORD_SALT.$_POST['password']);
-    	
     	#echo 'new pw salted'.print_r($new_salted_pw );
     	#echo 'current pw salted'.print_r($current_password);
     	
@@ -235,8 +235,10 @@ class users_controller extends base_controller {
     	
     		# Encrypt the password (with salt)
     		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);   
-    	
+    		$_POST['confirm_password'] = sha1(PASSWORD_SALT.$_POST['password']);
     	} 
+    	
+    	unset($_POST['confirm_password']);
   		
   		# Set the modified time  
     	$_POST['modified'] = Time::now();

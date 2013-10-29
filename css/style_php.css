@@ -1,75 +1,79 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* -------------------------------------------------------------------
+Main pieces
+ ------------------------------------------------------------------- */
 
 html, body, div,
-h2, h4, h5, h6, p, strong, ol, ul, li,
+h1, h2, h4, h5, h6, p, strong, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, footer, header, 
 menu, nav, section, 
 time, button {
-	margin: 0%;
-	padding: 0%;
-	border: 0;
-	font-size: 100%;
-	font-family: Avenir, Verdana, Geneva, sans-serif	;
-	vertical-align: baseline;
-	text-shadow: 0px 2px 3px #555;
+	margin: 			0%;
+	padding: 			0%;
+	border: 			0;
+	font-size: 			100%;
+	font-family: 		Avenir, Verdana, Geneva, sans-serif	;
+	vertical-align: 	baseline;
+	text-shadow: 		0px 2px 3px #555;
 
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
+
 body {
-	line-height: 1;
-     margin-left:	1%;
+	line-height: 		1;
+    margin-left:		1%;
 
-}
-
-textarea {
-
-	border-radius: 5px;
-	background-color: #E8E8E8 ;
-
-}
-
-#content {
-	border-radius: 5px;
-	background-color: #E8E8E8 ;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
 }
 
 h1 {
-	font-size: 5.0em;
-	color:     #880000;
-	margin-top: 	.5%;
-	margin-bottom: 	.5%;
-    z-index:2147483647;
+	font-size: 			48px;
+	color:    			#000099;
+	margin-top: 		.5%;
+	margin-bottom: 		.5%;
+    z-index:			2147483647;
 }
+
+h2 {
+
+
+}
+
 h3 {
 	font-size: 			12px;
 	color:			    #000099; 
 	font-style:		    italic;
 }
 
-img {
-	border-radius:25px;
+
+hr {
+
+	margin-right:		1%;
 }
+
+#footer_left {
+	float:				left;
+	margin-left:		1em;
+}
+
+#footer_right {
+	float:				right;
+	margin-right:       1em;
+}
+
+/* -------------------------------------------------------------------
+Forms
+ ------------------------------------------------------------------- */
+
+textarea, input {
+	border-radius: 		5px;
+}
+
+#content {
+	/*border-radius: 	5px;*/
+	background-color: 	#E8E8E8 ;
+}
+
+
 
 form {
 /*	margin-left: 5%;
@@ -77,34 +81,31 @@ form {
 */
 }
 
+img {
+	border-radius:		25px;
+}
+
 html, button {
  	background-color:	black;
-	background-image:url('../../images/noise.png');
+	background-image:	url('../../images/noise.png');
 		
 }
 a:link    {
-	color: white;
+	color: 				white;
 
 }
 a:visited {
-	color: white;
-}
-
-iframe {
-	border:	none;
-	margin: 0px;
-	padding: 0px;
-
+	color: 				white;
 }
 
 .nomargin, a.nomargin {
 	margin: 0%;
 	text-align: left;
 }
-#element_Label, #href, #Type	{
+#element_Label, #href,	{
 	border-radius:		3px;
 	border:			    2px inset #F8F8F8;
-	border-right:			#F8F8F8;
+	border-right:		#F8F8F8;
 	border-bottom:		#FFFFFF;
 	height:				2.2em;
 	background:			#D8D8D8;
@@ -112,20 +113,14 @@ iframe {
   
   }
 
-#sites td, #sites tr, #sites thead {
-	text-align:	left;
-	margin-right:	3px;
-	margin-left:	0px;
-	padding-right:	0px;
-}
-
-aside {
-	min-width:	10px;
-
-}
-
 .error {
-  color:			    #000099;
-  font-style:		    italic;
-  padding-left:		    0.5em;
+  	color:			    #000099;
+  	font-style:		    italic;
+  	padding-left:		0.5em;
 }
+
+.buttons {
+	background-color:	#000099;
+	color:				white;
+}
+

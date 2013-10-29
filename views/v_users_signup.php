@@ -2,22 +2,26 @@
 
 <form id="myForm" method='POST' action='/users/p_signup'>
 
-    First Name<br>
-    <input type='text' name='first_name'>
+    <label for="first_name">First Name</label><br>
+    <input type='text' name='first_name' required autofocus/>
     <br><br>
 
-    Last Name<br>
-    <input type='text' name='last_name'>
+    <label for="last_name">Last Name</label><br>
+    <input type='text' name='last_name' required/>
     <br><br>
 
-    Email<br>
-    <input type='text' name='email'>
+    <label for="email">Email</label><br>
+    <input type='text' name='email' />
     <br><br>
 
-    Password<br>
-    <input type='password' name='password'>
+    <label for="password">Password</label><br>
+    <input id="password" type='password' name='password' />
     <br><br>
     
+    <label for="confirm_password">Confirm password</label><br>
+	<input id="confirm_password" name="confirm_password" type="password" />
+	
+    <br><br>
     	<?php if(isset($error)): ?>
         	<div class='error'>
             	Sign Up failed. Do you already have an account?
@@ -25,6 +29,6 @@
         	<br>
     	<?php endif; ?>
 
-    <input type='submit' value='Sign Up'>
+    <input class="buttons" type='submit' value='Sign Up'>
 
 </form>

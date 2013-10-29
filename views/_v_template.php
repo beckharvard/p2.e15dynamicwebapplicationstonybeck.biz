@@ -48,14 +48,14 @@
 </body>
 <footer>
 <hr/>
-<div style="float:left;">
+<div id="footer_left">
 <h2>SpecSpec's +1 features</h2>
 <ul>
 	<li>Ability to edit own posts from Profile</li>
 	<li>Confirmation Email</li>
 </ul>
 </div>
-<div style="padding-left: 90%;">
+<div id="footer_right">
 
 <ul>
 <li>Anthony Beck</li>
