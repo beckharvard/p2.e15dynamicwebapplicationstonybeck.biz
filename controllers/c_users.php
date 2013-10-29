@@ -53,33 +53,52 @@ class users_controller extends base_controller {
 		$this->template->content = View::instance('v_users_signup');
     	$this->template->title = "Signed-up";
     	
-    	#setup for mail
-    	$to = $_POST['email'];
-    	$subject = "Welcome to SpecSpec!";
-    	$message = "It's great to meet you! Thanks for joining SpecSpec: you can log in at p2.e15dynamicwebapplicationstonybeck.biz";
-    	$from = 'beck@fas.harvard.edu';
-    	$headers = "From:" . $from; 	
+    	 // set initial error to false
+        $error = false;
+                
+        // initiate error
+        $this->template->content->error = '<br>';
+        
+           $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+        $exists = DB::instance(DB_NAME)->select_field("SELECT email FROM users WHERE email = '" . $_POST['email'] . "'");
 
-    	# More data we want stored with the user
-    	$_POST['created']  = Time::now();
-    	$_POST['modified'] = Time::now();
-    	unset($_POST['confirm_password']);
-
-    	# Encrypt the password (with salt)
-    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);            
-
-    	# Create an encrypted token via their email address and a random string
-    	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string()); 
-
-    	# Insert this user into the database 
-    	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
+       if (isset($exists)) {
+                           $error = true;
+                                   $this->template->content->error = 'This email address has already been registered, please try again.';
+                                   echo $this->template;          
+                }
+        else {                 
     	
-    	#Let's mail them out a welcome email 
-    	if(!$this->user) {
+    		#setup for mail
+    		$to = $_POST['email'];
+    		$subject = "Welcome to SpecSpec!";
+    		$message = "It's great to meet you! Thanks for joining SpecSpec: you can log in at p2.e15dynamicwebapplicationstonybeck.biz";
+    		$from = 'beck@fas.harvard.edu';
+    		$headers = "From:" . $from; 	
+
+    		# More data we want stored with the user
+    		$_POST['created']  = Time::now();
+    		$_POST['modified'] = Time::now();
+    		unset($_POST['confirm_password']);
+
+    		# Encrypt the password (with salt)
+    		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);            
+
+    		# Create an encrypted token via their email address and a random string
+    		$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string()); 
+
+    		# Insert this user into the database 
+    		$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
+    	
+    		#Let's mail them out a welcome email 
+    		
     		mail($to, $subject, $message, $headers);
-    	} 	
+    		
+		
 		# sent them to the login page
 		Router::redirect('/users/login');	
+		
+		}
 	}
 
     public function login($error = NULL) {

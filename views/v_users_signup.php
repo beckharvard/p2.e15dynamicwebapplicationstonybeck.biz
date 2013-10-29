@@ -24,7 +24,9 @@
     <br><br>
     	<?php if(isset($error)): ?>
         	<div class='error'>
-            	Sign Up failed. Do you already have an account?
+        		<?php echo $error; ?>
+            	Do you already have an account?
+            	 
         	</div>
         	<br>
     	<?php endif; ?>
