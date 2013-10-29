@@ -1,5 +1,5 @@
 <h2> Sign Up </h2>
-
+<br/>
 <form id="myForm" method='POST' action='/users/p_signup'>
 
     <label for="first_name">First Name</label><br>
