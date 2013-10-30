@@ -11,14 +11,13 @@
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
 </script>
 
-	<h1>SpecSpec</h1>
+	
 			
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 </head>
-
 <body>	
-
+	<h1>SpecSpec</h1>
 	 <div id='menu'>
 
         <!-- Menu for users who are logged in -->
