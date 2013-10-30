@@ -55,6 +55,7 @@ class posts_controller extends base_controller {
               ORDER BY posts.created DESC' ;
 
     	# Run the query
+    	$_POST = DB::instance(DB_NAME)->sanitize($q);
     	$posts = DB::instance(DB_NAME)->select_rows($q);
 
     	# Pass data to the View
@@ -159,14 +160,15 @@ class posts_controller extends base_controller {
     	# Build the query to get the post
     	$q = "SELECT *
     	    FROM posts 
-    	    WHERE post_id = ".$edited;
+    	    WHERE user_id = ".$this->user->user_id. " AND 
+    	    post_id = ".$edited;
 
     	# Execute the query to get all the users. 
     	# Store the result array in the variable $post
-    	$editable = DB::instance(DB_NAME)->select_row($q);
+    	$_POST['editable'] = DB::instance(DB_NAME)->select_row($q);
     	
     	# Pass data to the view
-    	$this->template->content->post = $editable;
+    	$this->template->content->post = $_POST['editable'];
     	
     	# Render template
         echo $this->template;  	 

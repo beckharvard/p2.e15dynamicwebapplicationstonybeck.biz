@@ -48,53 +48,62 @@ class users_controller extends base_controller {
 	
 	public function p_signup() {
 	
-		# this is the  method I came up with....AND it works
+		# setup the view
 		#------------------------------------------------------------------
 		$this->template->content = View::instance('v_users_signup');
     	$this->template->title = "Signed-up";
     	
-    	 // set initial error to false
+    	# set error var to false
         $error = false;
                 
-        // initiate error
+        # initiate error
         $this->template->content->error = '<br>';
         
-           $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
         $exists = DB::instance(DB_NAME)->select_field("SELECT email FROM users WHERE email = '" . $_POST['email'] . "'");
 
        if (isset($exists)) {
-                           $error = true;
-                                   $this->template->content->error = 'This email address has already been registered, please try again.';
-                                   echo $this->template;          
-                }
+            $error = true;
+            $this->template->content->error = 'Another account has already been created with this email address.';
+            echo $this->template;          
+            }
         else {                 
     	
-    		#setup for mail
-    		$to = $_POST['email'];
-    		$subject = "Welcome to SpecSpec!";
-    		$message = "It's great to meet you! Thanks for joining SpecSpec: you can log in at p2.e15dynamicwebapplicationstonybeck.biz";
-    		$from = 'beck@fas.harvard.edu';
-    		$headers = "From:" . $from; 	
+    	#setup for mail
+    	$to = $_POST['email'];
+    	$subject = "Welcome to SpecSpec!";
+    	$message = "It's great to meet you! Thanks for joining SpecSpec: you can log in at p2.e15dynamicwebapplicationstonybeck.biz";
+    	$from = 'beck@fas.harvard.edu';
+    	$headers = "From:" . $from; 	
 
-    		# More data we want stored with the user
-    		$_POST['created']  = Time::now();
-    		$_POST['modified'] = Time::now();
-    		unset($_POST['confirm_password']);
+    	# More data we want stored with the user
+    	$_POST['created']  = Time::now();
+    	$_POST['modified'] = Time::now();
+    	unset($_POST['confirm_password']);
 
-    		# Encrypt the password (with salt)
-    		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);            
+    	# Encrypt the password (with salt)
+    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);            
 
-    		# Create an encrypted token via their email address and a random string
-    		$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string()); 
+    	# Create an encrypted token via their email address and a random string
+    	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string()); 
 
-    		# Insert this user into the database 
-    		$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
+    	# Insert this user into the database 
+    	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
     	
-    		#Let's mail them out a welcome email 
-    		
-    		mail($to, $subject, $message, $headers);
-    		
-		
+    	# Let's automatically follow ourselves - Prepare the data array to be inserted
+    	$data = Array(
+    	    "created" => Time::now(),
+    	    "user_id" => $user_id,
+    	    "user_id_followed" => $user_id
+    	    );
+
+    	# Do the insert
+    	DB::instance(DB_NAME)->insert('users_users', $data);
+    	
+    	#Let's mail them out a welcome email 
+    		if(!$this->user) {
+    			mail($to, $subject, $message, $headers);
+    		} 	
 		# sent them to the login page
 		Router::redirect('/users/login');	
 		
@@ -173,6 +182,7 @@ class users_controller extends base_controller {
     	# Send them back to the login page.
     	Router::redirect("/users/login");
     }
+    
 	#got rid of  public function profile($user_name = NULL) {
     public function profile() {
     
@@ -244,12 +254,7 @@ class users_controller extends base_controller {
     		
     	$current_password = DB::instance(DB_NAME)->query($q);
     	
-
-    	#$new_salted_pw = sha1(PASSWORD_SALT.$_POST['password']);
-    	#echo 'new pw salted'.print_r($new_salted_pw );
-    	#echo 'current pw salted'.print_r($current_password);
-    	
-    	
+    	# I NEED TO CHECK THIS, becuase I DON'T THINK IT DOES WHAT I WANT IT TO BE DOING AT ALL	
     	if ($_POST['password'] != ''){
     	
     		# Encrypt the password (with salt)
@@ -258,7 +263,28 @@ class users_controller extends base_controller {
     	} 
     	
     	unset($_POST['confirm_password']);
-  		
+    	
+    	# set error & same vars to false
+        $error = false;
+        $same = false;
+                
+        # initiate error
+        $this->template->content->error = '<br>';
+        
+        $search_emails = "SELECT COUNT(*) FROM users WHERE email = '" . $_POST['email'] . "'";
+        
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+		# at some point I need to error check when chagin the email address.
+		# Maybe in version 2...
+		if ($error) {
+       
+            $error = true;
+            $this->template->content->error = 'This email address is already in use by another account.';
+            echo $this->template;          
+        }
+    	
+  		elseif (!$error) {
   		# Set the modified time  
     	$_POST['modified'] = Time::now();
     	# be sure to Associate this post with this user
@@ -272,6 +298,9 @@ class users_controller extends base_controller {
  		
  		# Send them back to the login page.
     	Router::redirect("/users/profile");
-	
+		}
+		else {
+            echo $this->template;
+        }
 	}
 } # eoc

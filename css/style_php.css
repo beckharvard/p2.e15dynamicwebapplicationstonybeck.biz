@@ -6,8 +6,7 @@ html, body, div,
 h1, h2, h4, h5, h6, p, strong, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, footer, header, 
-menu, nav, section, 
+article, aside, footer, header,  nav, section, 
 time, button {
 	margin: 			0%;
 	padding: 			0%;
@@ -15,7 +14,18 @@ time, button {
 	font-size: 			100%;
 	font-family: 		Avenir, Verdana, Geneva, sans-serif	;
 	vertical-align: 	baseline;
-	text-shadow: 		0px 2px 3px #555;
+
+
+}
+
+#menu {
+	margin-right:		2em;
+	padding-right:		2em;
+}
+
+#menu a {
+	margin-right:		1.5em;
+	padding-right:		1.5em;
 
 }
 
@@ -30,6 +40,7 @@ h1 {
 	color:    			#000099;
 	margin-top: 		.5%;
 	margin-bottom: 		.5%;
+	text-shadow: 		0px 2px 3px #555;
     z-index:			2147483647;
 }
 
@@ -98,10 +109,6 @@ a:visited {
 	color: 				white;
 }
 
-.nomargin, a.nomargin {
-	margin: 0%;
-	text-align: left;
-}
 #element_Label, #href,	{
 	border-radius:		3px;
 	border:			    2px inset #F8F8F8;

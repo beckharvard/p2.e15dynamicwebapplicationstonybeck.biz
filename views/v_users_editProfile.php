@@ -27,9 +27,9 @@
 	<input id="confirm_password" name="confirm_password" type="password" required>
 	
 	<br/><br/>
-	
     	<?php if(isset($error)): ?>
         	<div class='error'>
+        		<?php echo $error; ?>
             	Update failed. 
         	</div>
         	<br>
