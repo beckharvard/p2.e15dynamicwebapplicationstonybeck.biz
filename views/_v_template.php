@@ -10,8 +10,6 @@
 </script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
 </script>
-
-	
 			
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
@@ -44,25 +42,22 @@
 	<!--adding the javascript here, too because it performs better and it doesn't choke the DOM 
 	javascript may need to be here as well as in the head. that's why we echo $client_files_body-->
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
-</body>
 <footer>
 <hr/>
 <div id="footer_left">
 <h2>SpecSpec's +1 features</h2>
-<ul>
-	<li>Ability to edit own posts from Profile</li>
-	<li>Confirmation Email</li>
-</ul>
+	<ul>
+		<li>Ability to edit own posts from Profile</li>
+		<li>Confirmation Email</li>
+	</ul>
 </div>
 <div id="footer_right">
-
-<ul>
-<li>Anthony Beck</li>
-<li>DWA Project 2</li>
-<li>beck@fas.harvard.edu</li>
-
-</ul>
+	<ul>
+		<li>Anthony Beck</li>
+		<li>DWA Project 2</li>
+		<li>beck@fas.harvard.edu</li>
+	</ul>
 </div>
-
 </footer>
+</body>
 </html>
