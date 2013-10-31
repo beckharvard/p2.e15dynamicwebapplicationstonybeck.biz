@@ -2,23 +2,23 @@
 <br/>
 <form id="myForm" method='POST' action='/users/p_signup'>
 
-    <label id="first_name">First Name</label><br>
+    <label>First Name</label><br>
     <input type='text' name='first_name' required autofocus/>
     <br><br>
 
-    <label id="last_name">Last Name</label><br>
+    <label>Last Name</label><br>
     <input type='text' name='last_name' required/>
     <br><br>
 
-    <label id="email">Email</label><br>
+    <label>Email</label><br>
     <input type='text' name='email' />
     <br><br>
 
-    <label id="password">Password</label><br>
+    <label>Password</label><br>
     <input id="password" type='password' name='password' />
     <br><br>
     
-    <label id="confirm_password">Confirm password</label><br>
+    <label>Confirm password</label><br>
 	<input id="confirm_password" name="confirm_password" type="password" />
 	
     <br><br>
