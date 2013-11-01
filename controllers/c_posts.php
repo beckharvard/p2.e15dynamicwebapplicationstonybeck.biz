@@ -62,7 +62,7 @@ class posts_controller extends base_controller {
     	$this->template->content->posts = $posts;
 
     	# Render the View
-    	echo $this->template;
+		echo $this->template;
 
 	}
     
@@ -97,7 +97,7 @@ class posts_controller extends base_controller {
     	$this->template->content->connections = $connections;
 
     	# Render the view
-    	echo $this->template;
+		echo $this->template;
 	}
     
     public function follow($user_id_followed) {
@@ -134,7 +134,7 @@ class posts_controller extends base_controller {
     	# echo "This is something about adding a post";
     	
     	# Render template
-        echo $this->template;
+		echo $this->template;
     }
     
     public function p_add()  {
@@ -145,7 +145,7 @@ class posts_controller extends base_controller {
     	$_POST['created']  = Time::now();
     	$_POST['modified'] = Time::now();
     	# Associate this post with this user
-        $_POST['user_id']  = $this->user->user_id;
+		$_POST['user_id']  = $this->user->user_id;
 
     	$author_user_id = DB::instance(DB_NAME)->insert("posts", $_POST);
     	
@@ -171,7 +171,7 @@ class posts_controller extends base_controller {
     	$this->template->content->post = $_POST['editable'];
     	
     	# Render template
-        echo $this->template;  	 
+		echo $this->template;  	 
 
     }
     
@@ -182,15 +182,13 @@ class posts_controller extends base_controller {
   		
   		# Set the modified time  
     	$_POST['modified'] = Time::now();
-    	# be sure to Associate this post with this user
     	
-    	# NOT SURE I NEED THIS...
+    	# Be sure to Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;  
          
-    	$where_condition = 'WHERE post_id = '.$id;  
-    	# $where_condition = 'WHERE post_id = 10';  
-     
- 		$updated_post = DB::instance(DB_NAME)->update('posts', $_POST, $where_condition);
+		# set up the where conditon and update the post.        
+		$where_condition = 'WHERE post_id = '.$id;   
+		$updated_post = DB::instance(DB_NAME)->update('posts', $_POST, $where_condition);
 
 		# Send them back
        	Router::redirect('/users/profile');

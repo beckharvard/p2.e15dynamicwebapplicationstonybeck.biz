@@ -33,11 +33,11 @@ class users_controller extends base_controller {
     	
     }
 
-  	public function signup($error = NULL) {
+	public function signup($error = NULL) {
 
         # Setup view
-        $this->template->content = View::instance('v_users_signup');
-        $this->template->title   = "Sign Up";
+		$this->template->content = View::instance('v_users_signup');
+		$this->template->title   = "Sign Up";
             
         # Pass data to the view
 		$this->template->content->error = $error;
@@ -51,7 +51,7 @@ class users_controller extends base_controller {
 		# setup the view
 		#------------------------------------------------------------------
 		$this->template->content = View::instance('v_users_signup');
-    	$this->template->title = "Signed-up";
+		$this->template->title = "Signed-up";
     	
     	# set error var to false
         $error = false;
@@ -114,31 +114,31 @@ class users_controller extends base_controller {
 
     public function login($error = NULL) {
         # Set up the view
-    	$this->template->content = View::instance("v_users_login");
-    	$this->template->title = "Log In";
+		$this->template->content = View::instance("v_users_login");
+		$this->template->title = "Log In";
 
-    	# Pass data to the view
-    	$this->template->content->error = $error;
+		# Pass data to the view
+		$this->template->content->error = $error;
     	
-    	# Render the view
-    	echo $this->template;
+		# Render the view
+		echo $this->template;
     	
     }
     
 	public function p_login() {
 
-    	# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
-    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
-    	# Hash submitted password so we can compare it against one in the db
-    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+		# Hash submitted password so we can compare it against one in the db
+		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-    	# Search the db for this email and password
-    	# Retrieve the token if it's available
-    	$q = "SELECT token 
-        	FROM users 
-       	 	WHERE email = '".$_POST['email']."' 
-        	AND password = '".$_POST['password']."'";
+		# Search the db for this email and password
+		# Retrieve the token if it's available
+		$q = "SELECT token 
+			FROM users 
+			WHERE email = '".$_POST['email']."' 
+			AND password = '".$_POST['password']."'";
 
     	$token = DB::instance(DB_NAME)->select_field($q);
 
@@ -201,7 +201,7 @@ class users_controller extends base_controller {
             posts.content,
             posts.created,
             posts.post_id
-        FROM posts
+		FROM posts
         WHERE posts.user_id = '.$this->user->user_id.' 
             ORDER BY posts.created DESC' ;
 
@@ -216,10 +216,10 @@ class users_controller extends base_controller {
 	}
 	
 	public function editProfile() {
-	
+		# don't let other users get to profile...
 		if(!$this->user) {
-            die("Members only. <a href='/users/login'>Login</a>");
-        }
+			die("Members only. <a href='/users/login'>Login</a>");
+		}
 	
 		#Set up the view
     	$this->template->content = View::instance('v_users_editProfile');
@@ -227,7 +227,7 @@ class users_controller extends base_controller {
     	
     	# Prepare the data array to be inserted
     	$data = Array(
-    		"first_name" => $this->user->first_name,
+			"first_name" => $this->user->first_name,
     	    "last_name" => $this->user->last_name,
     	    "email" => $this->user->email,
     	    "password" => $this->user->password,
@@ -242,29 +242,28 @@ class users_controller extends base_controller {
 	}
 	
 	public function p_editProfile($id) {
-	
+		# this user, not others...and must be logged in, too!
 		if(!$this->user) {
-            die("Members only. <a href='/users/login'>Login</a>");
+			die("Members only. <a href='/users/login'>Login</a>");
         }
 	
-	    	# Set up the View
-    	$this->template->content = View::instance('v_users_p_editProfile');
+		# Set up the View
+		$this->template->content = View::instance('v_users_p_editProfile');
     	
-    	$q = 'SELECT password 
-    		FROM users
-    		WHERE user_id = '.$id;
+		$q = 'SELECT password 
+			FROM users
+			WHERE user_id = '.$id;
     		
-    	$current_password = DB::instance(DB_NAME)->query($q);
+		$current_password = DB::instance(DB_NAME)->query($q);
     	
-    	# for future use... if I want to allow password to pre-populate or be empty
-    	if ($_POST['password'] != ''){
-    	
+		# for future use... if I want to allow password to pre-populate or be empty
+		if ($_POST['password'] != ''){
     		# Encrypt the password (with salt)
-    		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);   
-    		$_POST['confirm_password'] = sha1(PASSWORD_SALT.$_POST['password']);
+			$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);   
+			$_POST['confirm_password'] = sha1(PASSWORD_SALT.$_POST['password']);
     	} 
     	
-    	unset($_POST['confirm_password']);
+		unset($_POST['confirm_password']);
     	
     	# set error & same vars to false
         $error = false;
@@ -280,44 +279,41 @@ class users_controller extends base_controller {
         #get the number of rows where that email exists
         $email_matches = mysqli_num_rows($count_q);
         
-        # if we have a match, is it this user?
-        if ($email_matches > 0) {
-        	#echo "it's greater than o!";
-        		$email_user_id = $count_q->field_seek(1);
+		# if we have a match, is it this user?
+		if ($email_matches > 0) {
+			#get the user_id
+			$email_user_id = $count_q->field_seek(1);
+			# if the user_id is a match, set the error flag.	
 			if(!$email_user_id == $this->user->user_id) {
 				$error = true;
-			}
-        		
-        }
+			}	
+		}
         
-        # i think we need to sanitze this post...
-        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		# i think we need to sanitze this post...
+		#$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# at some point I need to error check when chagin the email address.
 		# Maybe in version 2...
 		if ($error) {
-
-            $this->template->content->error = 'This email address is already in use by another account.';
-            echo $this->template;          
-        }
+			$this->template->content->error = 'This email address is already in use by another account.';
+			echo $this->template;          
+		}
     	
-  		elseif (!$error) {
-  		# Set the modified time  
-    	$_POST['modified'] = Time::now();
-    	# be sure to Associate this post with this user
-    	
-    	# NOT SURE I NEED THIS...
-        $_POST['user_id']  = $this->user->user_id;  
+		elseif (!$error) {
+			# Set the modified time  
+			$_POST['modified'] = Time::now();
+			# be sure to Associate this post with this user
+			$_POST['user_id']  = $this->user->user_id;  
          
-    	$where_condition = 'WHERE user_id = '.$id;    
+			$where_condition = 'WHERE user_id = '.$id;    
      
- 		$updated_post = DB::instance(DB_NAME)->update('users', $_POST, $where_condition);
+ 			$updated_post = DB::instance(DB_NAME)->update('users', $_POST, $where_condition);
  		
- 		# Send them back to the login page.
-    	Router::redirect("/users/profile");
+			# Send them back to the login page.
+			Router::redirect("/users/profile");
 		}
 		else {
-            echo $this->template;
-        }
+			echo $this->template;
+		}
 	}
 } # eoc
