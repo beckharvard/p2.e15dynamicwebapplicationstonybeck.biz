@@ -249,6 +249,9 @@ class users_controller extends base_controller {
 	
 		# Set up the View
 		$this->template->content = View::instance('v_users_p_editProfile');
+		
+		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
     	
 		$q = 'SELECT password 
 			FROM users
@@ -272,8 +275,12 @@ class users_controller extends base_controller {
         # initiate error
         $this->template->content->error = '<br>';
         
+        										
         #query for matches on this new email address
-        $search_emails = "SELECT * FROM users WHERE email = '" . $_POST['email'] . "'";
+        
+        #  JUST CHANGED FROM $search_emails = "SELECT user_id FROM users WHERE email = '". $_POST['email']."'";
+        # to:
+        $search_emails = "SELECT * FROM users WHERE email = '". $_POST['email']."'";
         #execute the query
         $count_q = DB::instance(DB_NAME)->query($search_emails);
         #get the number of rows where that email exists
@@ -282,24 +289,23 @@ class users_controller extends base_controller {
 		# if we have a match, is it this user?
 		if ($email_matches > 0) {
 			#get the user_id
-			$email_user_id = $count_q->field_seek(1);
+			$email_user_id = DB::instance(DB_NAME)->select_row($search_emails);
+
 			# if the user_id is a match, set the error flag.	
-			if(!$email_user_id == $this->user->user_id) {
+			if(! $email_user_id['user_id'] == $this->user->user_id) {
 				$error = true;
 			}	
 		}
-        
-		# i think we need to sanitze this post...
-		#$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# at some point I need to error check when chagin the email address.
 		# Maybe in version 2...
 		if ($error) {
-			$this->template->content->error = 'This email address is already in use by another account.';
-			echo $this->template;          
+			$this->template->content->error = 'This email address is already in use by another account.';   
+
+			echo $this->template;      
 		}
     	
-		elseif (!$error) {
+		elseif(!$error)  {
 			# Set the modified time  
 			$_POST['modified'] = Time::now();
 			# be sure to Associate this post with this user
@@ -308,7 +314,7 @@ class users_controller extends base_controller {
 			$where_condition = 'WHERE user_id = '.$id;    
      
  			$updated_post = DB::instance(DB_NAME)->update('users', $_POST, $where_condition);
- 		
+ 			
 			# Send them back to the login page.
 			Router::redirect("/users/profile");
 		}
