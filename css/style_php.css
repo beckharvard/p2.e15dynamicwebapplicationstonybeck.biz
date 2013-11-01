@@ -14,8 +14,6 @@ time, button {
 	font-size: 			100%;
 	font-family: 		Avenir, Verdana, Geneva, sans-serif	;
 	vertical-align: 	baseline;
-
-
 }
 
 #menu {
@@ -26,13 +24,15 @@ time, button {
 #menu a {
 	margin-right:		1.5em;
 	padding-right:		1.5em;
+}
 
+#main {
+	min-height:			400px;
 }
 
 body {
 	line-height: 		1;
     margin-left:		1%;
-
 }
 
 h1 {
@@ -46,7 +46,6 @@ h1 {
 
 h2 {
 
-
 }
 
 h3 {
@@ -55,9 +54,7 @@ h3 {
 	font-style:		    italic;
 }
 
-
 hr {
-
 	margin-right:		1%;
 }
 
@@ -84,41 +81,22 @@ textarea, input {
 	background-color: 	#E8E8E8 ;
 }
 
-
-
-form {
-/*	margin-left: 5%;
-	margin-top: 5%;
-*/
-}
-
 img {
 	border-radius:		25px;
 }
 
 html, button {
  	background-color:	black;
-	background-image:	url('../../images/noise.png');
-		
+	background-image:	url('../../images/noise.png');	
 }
+
 a:link    {
 	color: 				white;
-
 }
+
 a:visited {
 	color: 				white;
 }
-
-#element_Label, #href,	{
-	border-radius:		3px;
-	border:			    2px inset #F8F8F8;
-	border-right:		#F8F8F8;
-	border-bottom:		#FFFFFF;
-	height:				2.2em;
-	background:			#D8D8D8;
-	opacity:				0.7;
-  
-  }
 
 .error {
   	color:			    #000099;
@@ -129,5 +107,7 @@ a:visited {
 .buttons {
 	background-color:	#000099;
 	color:				white;
+	font-weight:		bold;
+	font-size: 			12px;
 }
 

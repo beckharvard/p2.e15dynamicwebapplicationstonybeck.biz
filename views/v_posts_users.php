@@ -1,3 +1,5 @@
+<hr/>
+<br/>
 <?php foreach($users as $user): ?>
 
     <!-- If there exists a connection with this user, show a unfollow link -->

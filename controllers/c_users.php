@@ -91,6 +91,8 @@ class users_controller extends base_controller {
     	$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
     	
     	# Let's automatically follow ourselves - Prepare the data array to be inserted
+    	# this isn't as DRY as i'd like it to be, but I don't know how to call the follow
+    	# function in the posts class...
     	$data = Array(
     	    "created" => Time::now(),
     	    "user_id" => $user_id,
@@ -254,7 +256,7 @@ class users_controller extends base_controller {
     		
     	$current_password = DB::instance(DB_NAME)->query($q);
     	
-    	# I NEED TO CHECK THIS, becuase I DON'T THINK IT DOES WHAT I WANT IT TO BE DOING AT ALL	
+    	# for future use... if I want to allow password to pre-populate or be empty
     	if ($_POST['password'] != ''){
     	
     		# Encrypt the password (with salt)
@@ -271,15 +273,30 @@ class users_controller extends base_controller {
         # initiate error
         $this->template->content->error = '<br>';
         
-        $search_emails = "SELECT COUNT(*) FROM users WHERE email = '" . $_POST['email'] . "'";
+        #query for matches on this new email address
+        $search_emails = "SELECT * FROM users WHERE email = '" . $_POST['email'] . "'";
+        #execute the query
+        $count_q = DB::instance(DB_NAME)->query($search_emails);
+        #get the number of rows where that email exists
+        $email_matches = mysqli_num_rows($count_q);
         
+        # if we have a match, is it this user?
+        if ($email_matches > 0) {
+        	#echo "it's greater than o!";
+        		$email_user_id = $count_q->field_seek(1);
+			if(!$email_user_id == $this->user->user_id) {
+				$error = true;
+			}
+        		
+        }
+        
+        # i think we need to sanitze this post...
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# at some point I need to error check when chagin the email address.
 		# Maybe in version 2...
 		if ($error) {
-       
-            $error = true;
+
             $this->template->content->error = 'This email address is already in use by another account.';
             echo $this->template;          
         }

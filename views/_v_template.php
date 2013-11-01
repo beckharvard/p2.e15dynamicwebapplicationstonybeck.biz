@@ -7,9 +7,9 @@
 	<link href="../css/style_php.css" type="text/css" rel="stylesheet">
 	<link href="../../css/style_php.css" type="text/css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript">
-</script>
-<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
-</script>
+	</script>
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js">
+	</script>
 			
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
@@ -34,11 +34,11 @@
         <?php endif; ?>
 
     </div>
-
     <br>
-
+	<div id="main">
     <?php if(isset($content)) echo $content; ?>
-
+	</div>
+	
 	<!--adding the javascript here, too because it performs better and it doesn't choke the DOM 
 	javascript may need to be here as well as in the head. that's why we could echo $client_files_body
 	but then it won't validate at Markup Validation Service and that effects our grade. so, I am commenting out
