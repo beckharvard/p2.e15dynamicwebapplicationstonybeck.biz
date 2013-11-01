@@ -2,12 +2,13 @@
 <br/>
 <form method ='POST' action ='/users/p_login'>
 
- 	Email<br>
+Email
+<br>
     <input type='text' name='email'>
     <br><br>
 
     Password<br>
-    <input type='password' name='password'>
+	<input type='password' name='password'>
     <br><br>
     
     	<?php if(isset($error)): ?>
@@ -17,6 +18,6 @@
         	<br>
     	<?php endif; ?>
 
-	 <input class="buttons" type='submit' value='Log In'>
+	<input class="buttons" type='submit' value='Log In'>
 
 </form>

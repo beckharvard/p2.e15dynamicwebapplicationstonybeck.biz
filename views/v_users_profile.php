@@ -1,5 +1,5 @@
 <?php if(!$user): ?>
-	<?php    	Router::redirect("/users/login");  ?>
+	<?php Router::redirect("/users/login");  ?>
 <?php else: ?>
 	<h2>This is <?=$user->first_name?>'s  profile...</h2>
 <?php endif; ?>
@@ -16,7 +16,11 @@
 	echo date('M d Y', $convert_time); 
 ?>
 <br/>
-<h3><a href='/users/editProfile' >Edit my profile</a></h3>
+
+	<h3>
+		<a href='/users/editProfile' >Edit my profile</a>
+	</h3>
+
 <hr/>
 <br/>
 
@@ -27,7 +31,7 @@
 		<h3>This post was created on:
 		
     		<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
-       			<?=Time::display($post['created'])?>
+				<?=Time::display($post['created'])?>
     		</time>
     	
     		<a href='/posts/edit/<?=$post['post_id']; ?>' >Edit this post</a>
@@ -36,5 +40,8 @@
 	<br/>
 <?php endforeach; ?>
 	<br/>
-	<h2> Why not follow someone? <a href='/posts/users'>Other Posters</a></h2>
+	
+	<h2> 
+		Why not follow someone? <a href='/posts/users'>Other Posters</a>
+	</h2>
 

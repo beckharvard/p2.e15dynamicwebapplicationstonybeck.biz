@@ -1,9 +1,10 @@
 <?php if(!$user): ?>
-	<?php    	Router::redirect("/users/login");  ?>
+	<?php Router::redirect("/users/login");  ?>
 <?php else: ?>
 	<h2>This is <?=$user->first_name?>'s  profile...</h2>
 <?php endif; ?>
 <br/>
+
 <?php if($user) echo $user->first_name;?>
 <?php echo ' '; ?>
 <?php if($user) echo $user->last_name; ?>
@@ -16,15 +17,18 @@
 	echo date('M d Y', $convert_time); 
 ?>
 <br/>
-<h3><a href='/users/editProfile' >Edit my profile</a></h3>
+	<h3>
+		<a href='/users/editProfile' >Edit my profile</a>
+	</h3>
 <hr/>
 <br/>
+
 <?php if(isset($error)): ?>
     <div class='error'>
         <?php echo $error; ?>
-            	Update failed. 
+        	Update failed. 
     </div>
-        	<br>
+    <br>
 <?php endif; ?>
 
 
