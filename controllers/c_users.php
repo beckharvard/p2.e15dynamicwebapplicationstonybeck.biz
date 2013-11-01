@@ -277,10 +277,7 @@ class users_controller extends base_controller {
         
         										
         #query for matches on this new email address
-        
-        #  JUST CHANGED FROM $search_emails = "SELECT user_id FROM users WHERE email = '". $_POST['email']."'";
-        # to:
-        $search_emails = "SELECT * FROM users WHERE email = '". $_POST['email']."'";
+        $search_emails = "SELECT user_id FROM users WHERE email = '". $_POST['email']."'";
         #execute the query
         $count_q = DB::instance(DB_NAME)->query($search_emails);
         #get the number of rows where that email exists
@@ -290,16 +287,24 @@ class users_controller extends base_controller {
 		if ($email_matches > 0) {
 			#get the user_id
 			$email_user_id = DB::instance(DB_NAME)->select_row($search_emails);
+			#print_r($email_user_id['user_id']);
+			#print_r($this->user->user_id);
 
-			# if the user_id is a match, set the error flag.	
-			if(! $email_user_id['user_id'] == $this->user->user_id) {
-				$error = true;
+			# if the user_id is a match, 	
+			if( $email_user_id['user_id'] == $this->user->user_id) {
+
+					#do nothing
 			}	
+			# set the error flag.
+			else {
+				$error = true;
+			}
 		}
-
-		# at some point I need to error check when chagin the email address.
+		
+		# at some point I need to error check when changing the email address.
 		# Maybe in version 2...
-		if ($error) {
+		if ($error == true) {
+			$this->template->content = View::instance('v_users_p_editProfile');
 			$this->template->content->error = 'This email address is already in use by another account.';   
 
 			echo $this->template;      
