@@ -147,8 +147,13 @@ class posts_controller extends base_controller {
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
     	$_POST['modified'] = Time::now();
+    	
     	# Associate this post with this user
-		$_POST['user_id']  = $this->user->user_id;
+		$_POST['user_id'] = $this->user->user_id;
+		
+		# To protect against xss we strip tags
+		$_POST["content"] = strip_tags($_POST["content"]);
+		$_POST["content"] = stripslashes($_POST["content"]);
 
     	$author_user_id = DB::instance(DB_NAME)->insert("posts", $_POST);
     	
@@ -168,8 +173,8 @@ class posts_controller extends base_controller {
 
     	# Execute the query to get all the users. 
     	# Store the result array in the variable $post
-    	$_POST['editable'] = DB::instance(DB_NAME)->select_row($q);
-    	
+    	$_POST["editable"] = DB::instance(DB_NAME)->select_row($q);
+
     	# Pass data to the view
     	$this->template->content->post = $_POST['editable'];
     	
@@ -191,6 +196,10 @@ class posts_controller extends base_controller {
     	
     	# Be sure to Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;  
+        
+		# To protect against xss we strip tags
+		$_POST["content"] = stripslashes($_POST["content"]);
+		$_POST["content"] = strip_tags($_POST["content"]);
          
 		# set up the where conditon and update the post.        
 		$where_condition = 'WHERE post_id = '.$id;   
@@ -199,5 +208,6 @@ class posts_controller extends base_controller {
 		# Send them back
        	Router::redirect('/users/profile');
     }
+
 } # eoc
     
