@@ -14,6 +14,8 @@ class users_controller extends base_controller {
     		);
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
     	
+    	
+    	
     	$client_files_body = Array(
     		'../js/validate.js',
         	'../../js/validate.js',
