@@ -15,7 +15,7 @@ class index_controller extends base_controller {
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
         	'../../../js/validate_posts.js',
-    		'../css/style_php.css'
+    		'css/style_php.css'
     		);
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
     	
@@ -27,7 +27,7 @@ class index_controller extends base_controller {
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
         	'../../../js/validate_posts.js',
-    		'../css/style_php.css'
+    		'css/style_php.css'
     		);
     	$this->template->client_files_body = Utils::load_client_files($client_files_body); 
 		
