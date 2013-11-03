@@ -39,10 +39,6 @@
     <?php if(isset($content)) echo $content; ?>
 	</div>
 	
-	<!--adding the javascript here, too because it performs better and it doesn't choke the DOM 
-	javascript may need to be here as well as in the head. that's why we could echo $client_files_body
-	but then it won't validate at Markup Validation Service and that effects our grade. so, I am commenting out
-	<?php if(isset($client_files_body)) echo $client_files_body; ?>-->
 <footer>
 <hr/>
 <div id="footer_left">
