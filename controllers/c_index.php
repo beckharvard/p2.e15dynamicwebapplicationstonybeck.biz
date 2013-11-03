@@ -25,13 +25,27 @@ class index_controller extends base_controller {
 			echo $this->template;
 	
 		# CSS/JS includes
-			/*
-			$client_files_head = Array("");
-	    	$this->template->client_files_head = Utils::load_client_files($client_files);
-	    	
-	    	$client_files_body = Array("");
-	    	$this->template->client_files_body = Utils::load_client_files($client_files_body);   
-	    	*/
+		
+			$client_files_head = Array(
+        		'../js/validate.js',
+        		'../../js/validate.js',
+        		'../js/validate_posts.js',
+        		'../../js/validate_posts.js',
+    			'../../css/style_php.css',
+    			'../../../css/style_php.css'
+    		);
+    		$this->template->client_files_head = Utils::load_client_files($client_files_head);
+    	
+    		$client_files_body = Array(
+    			'../js/validate.js',
+        		'../../js/validate.js',
+        		'../js/validate_posts.js',
+        		'../../js/validate_posts.js',
+    			'../../css/style_php.css',
+    			'../../../css/style_php.css'
+    			);
+    		$this->template->client_files_body = Utils::load_client_files($client_files_body); 
+
 
         
 
