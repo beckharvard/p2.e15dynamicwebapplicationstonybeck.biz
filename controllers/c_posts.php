@@ -12,7 +12,6 @@ class posts_controller extends base_controller {
         	'../../js/validate.js',
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
-    		'../css/style_php.css',
     		'../../css/style_php.css',
     		'../../../css/style_php.css'
     		);
@@ -23,7 +22,6 @@ class posts_controller extends base_controller {
         	'../../js/validate.js',
         	'../js/validate_posts.js',
         	'../../js/validate_posts.js',
-    		'../css/style_php.css',
     		'../../css/style_php.css',
     		'../../../css/style_php.css'
     		);
