@@ -149,9 +149,11 @@ class posts_controller extends base_controller {
     	# Associate this post with this user
 		$_POST['user_id'] = $this->user->user_id;
 		
-		# To protect against xss we strip tags
+		# To protect against xss we remove HTMl special characters, strip tags and slashes
+		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
 		$_POST["content"] = strip_tags($_POST["content"]);
 		$_POST["content"] = stripslashes($_POST["content"]);
+		
 
     	$author_user_id = DB::instance(DB_NAME)->insert("posts", $_POST);
     	
@@ -195,9 +197,10 @@ class posts_controller extends base_controller {
     	# Be sure to Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;  
         
-		# To protect against xss we strip tags
-		$_POST["content"] = stripslashes($_POST["content"]);
+		# To protect against xss we remove HTMl special characters, strip tags and slashes
+		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
 		$_POST["content"] = strip_tags($_POST["content"]);
+		$_POST["content"] = stripslashes($_POST["content"]);
          
 		# set up the where conditon and update the post.        
 		$where_condition = 'WHERE post_id = '.$id;   
