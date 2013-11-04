@@ -7,5 +7,6 @@ Edit your post
 	</textarea>
     <br>
     <input class="buttons" type='submit' value='Update Post'>
+    <h3>Maximum post length is 72 characters</h3>
 </form>
 
