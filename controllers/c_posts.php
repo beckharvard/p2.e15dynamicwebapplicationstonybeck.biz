@@ -61,7 +61,6 @@ class posts_controller extends base_controller {
 
     	# Render the View
 		echo $this->template;
-
 	}
     
 	public function users() {
@@ -123,7 +122,6 @@ class posts_controller extends base_controller {
 
     	# Send them back
     	Router::redirect("/posts/users");
-
 	}
     
     public function add()  {
@@ -180,7 +178,6 @@ class posts_controller extends base_controller {
     	
     	# Render template
 		echo $this->template;  	 
-
     }
     
     public function p_edit($id)  {
