@@ -196,7 +196,7 @@ class posts_controller extends base_controller {
     	
     	# Be sure to Associate this post with this user
 		$_POST['user_id']  = $this->user->user_id;  
-        
+		
 		# To protect against xss we remove HTMl special characters, strip tags and slashes
 		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
 		$_POST["content"] = strip_tags($_POST["content"]);
