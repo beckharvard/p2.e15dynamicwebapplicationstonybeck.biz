@@ -24,8 +24,13 @@
     <br><br>
     	<?php if(isset($error)): ?>
         	<div class='error'>
-        		<?php echo $error; ?>
-            	Do you already have an account?
+        		<?php echo $error; ?> 
+        		<br>            	
+            	<?php if(isset($error2)): ?>    
+            				
+        			<?php echo $error2; ?>
+        			
+    			<?php endif; ?>
             	 
         	</div>
         	<br>

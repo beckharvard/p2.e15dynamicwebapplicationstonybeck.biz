@@ -55,11 +55,16 @@ class users_controller extends base_controller {
     	
     	# set error var to false
         $error = false;
+        $error2 = false;
                 
         # initiate error
         $this->template->content->error = '<br>';
+        $this->template->content->error2 = 'Your passsword is blank.';
         
+        # sanitize this request for the email
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+        
+        #select the field for that query
         $exists = DB::instance(DB_NAME)->select_field("SELECT email FROM users WHERE email = '" . $_POST['email'] . "'");
 
        if (isset($exists)) {
@@ -67,6 +72,11 @@ class users_controller extends base_controller {
             $this->template->content->error = 'Another account has already been created with this email address.';
             echo $this->template;          
             }
+       elseif ($_POST['password'] == '') {
+        	$error2 = true;
+            $this->template->content->error2 = 'Your passsword is blank.';
+            echo $this->template;  	
+        }
         else {                 
     	
     	#setup for mail
