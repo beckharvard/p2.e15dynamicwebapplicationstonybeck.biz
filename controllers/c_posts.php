@@ -137,9 +137,6 @@ class posts_controller extends base_controller {
     	# Set up the View
     	$this->template->content = View::instance('v_posts_p_add');
     	
-    	# Prevent SQL injection attacks by sanitizing the data the user entered in the form
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-    	
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
     	$_POST['modified'] = Time::now();
@@ -150,7 +147,7 @@ class posts_controller extends base_controller {
 		# To protect against xss we remove HTMl special characters, strip tags and slashes
 		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
 		$_POST["content"] = strip_tags($_POST["content"]);
-		$_POST["content"] = stripslashes($_POST["content"]);
+		#$_POST["content"] = stripslashes($_POST["content"]);
 		
 
     	$author_user_id = DB::instance(DB_NAME)->insert("posts", $_POST);
@@ -182,9 +179,6 @@ class posts_controller extends base_controller {
     
     public function p_edit($id)  {
     
-    	# Prevent SQL injection attacks by sanitizing the data the user entered in the form
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-    
     	# Set up the View
     	$this->template->content = View::instance('v_posts_p_edit');
   		
@@ -195,9 +189,9 @@ class posts_controller extends base_controller {
 		$_POST['user_id']  = $this->user->user_id;  
 		
 		# To protect against xss we remove HTMl special characters, strip tags and slashes
-		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
+		$_POST["content"] = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');	
 		$_POST["content"] = strip_tags($_POST["content"]);
-		$_POST["content"] = stripslashes($_POST["content"]);
+		#$_POST["content"] = stripslashes($_POST["content"]);
          
 		# set up the where conditon and update the post.        
 		$where_condition = 'WHERE post_id = '.$id;   

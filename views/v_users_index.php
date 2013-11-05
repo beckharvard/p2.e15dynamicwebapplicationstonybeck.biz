@@ -5,7 +5,7 @@
 	<?php foreach($posts as $post): ?>
 		<article>
 			<?=$post['content'] = trim($post['content'], " \x00\t\n\r" ) ?>
-    		<p><?=$post['content']?></p>
+    		<p><?=nl2br($post['content'])?></p>
     		<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
         		<?=Time::display($post['created'])?>
     		</time>

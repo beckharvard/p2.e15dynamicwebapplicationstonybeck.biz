@@ -27,7 +27,7 @@
 <?php foreach($posts as $post): ?>
 	
 	<article>
-    	<p><?=$post['content'] = trim($post['content'], " \t\n\r" )?></p> 
+    	<p><?=nl2br($post['content'])?></p> 
 		<h3>This post was created on:
 		
     		<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
